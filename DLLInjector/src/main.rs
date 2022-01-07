@@ -19,7 +19,18 @@ const PROCESS_NAME: &str = "win32calc.exe";
 const DLL_PATH: &str = "target\\release\\dllgenerator.dll";
 
 fn get_process_entry(proc_name: &str) -> Result<PROCESSENTRY32, std::io::Error> {
-	let mut process_entry: PROCESSENTRY32 = PROCESSENTRY32 { dwSize: mem::size_of::<PROCESSENTRY32>() as u32, cntUsage: 0, th32ProcessID: 0, th32DefaultHeapID: 0, th32ModuleID: 0, cntThreads: 0, th32ParentProcessID: 0, pcPriClassBase: 0, dwFlags: 0, szExeFile: [0; 260] };
+	let mut process_entry: PROCESSENTRY32 = PROCESSENTRY32 { 
+		dwSize: mem::size_of::<PROCESSENTRY32>() as u32, 
+		cntUsage: 0, 
+		th32ProcessID: 0, 
+		th32DefaultHeapID: 0, 
+		th32ModuleID: 0, 
+		cntThreads: 0, 
+		th32ParentProcessID: 0, 
+		pcPriClassBase: 0, 
+		dwFlags: 0, 
+		szExeFile: [0; 260] 
+	};
 	let process_snapshot_flags = 2; // TH32CS_SNAPPROCESS 0x00000002
 	unsafe {
 		let process_snapshot_handle: HANDLE = CreateToolhelp32Snapshot(process_snapshot_flags, 0);
