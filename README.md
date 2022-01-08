@@ -1,6 +1,6 @@
 # Basic DLL Injection written in Rust  
   
-Classic DLL injection via CreateRemoteThread & LoadLibrary.  
+Basic DLL injection via CreateRemoteThread & LoadLibrary.  
   
 ![](dll-injection-technique.gif)
   

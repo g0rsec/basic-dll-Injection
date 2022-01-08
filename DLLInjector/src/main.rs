@@ -48,7 +48,7 @@ fn get_process_entry(proc_name: &str) -> Result<PROCESSENTRY32, std::io::Error> 
         }
         return Err(io::Error::new(
             ErrorKind::Other,
-            format!("Unable to find {}", proc_name),
+            format!("Unable to find {} process.", proc_name),
         ));
     }
 }
@@ -119,10 +119,6 @@ fn main() {
                     0,
                     null_mut(),
                 );
-                info!("Waiting 5 seconds before stopping DLL injection.");
-                WaitForSingleObject(rhandle, 5000);
-                info!("Cleaning DLL injection from target process.");
-                TerminateThread(rhandle, 0);
                 CloseHandle(rhandle);
                 VirtualFreeEx(process_handle, process_alloc, dll_path_size, MEM_RELEASE);
                 CloseHandle(process_handle);
